@@ -5,6 +5,7 @@ Created on Feb 24, 2013
 '''
 import struct,sys
 from types import *
+from bitstring import *
 class GifExaminer:
     def __init__(self,filename):
         self.imageCount = 0
@@ -15,7 +16,7 @@ class GifExaminer:
         self.blockFunctions = {33 : self.determineExtensionBlock, 44 : self.readImageBlock, 59:self.exit}
         
         if self.globalPalette:
-            self.readColorPalette(self.globalPaletteSize)
+            self.globalPalette = self.readColorPalette(self.globalPaletteSize)
             
         while True:
             functionIdentifier = self.file.read(1)
@@ -89,10 +90,7 @@ class GifExaminer:
         return palette
             
         
-    def extractIntFromByte(self,number,start,bitlength,littleendian = False):
-        if (littleendian):
-            number = self.reverseEndianness(number, 8)
-            start = 8 - start - bitlength
+    def extractIntFromByte(self,number,start,bitlength):
         return (number & int('0'*start+'1'*bitlength+'0'*(8-start-bitlength),2)) >> 8-start-bitlength
     
     def reverseEndianness(self,a,size):
@@ -108,6 +106,7 @@ class GifExaminer:
         self.extensionBlockFunctions.get(controlchar,self.incorrectFormat)()
         
     def readGraphicsControlBlock(self):
+        self.header("GRAPHICS CONTROL EXTENSION BLOCK")
         print "graphics control block"
         size = ord(self.file.read(1))
         assert size == 4
@@ -149,6 +148,7 @@ class GifExaminer:
         
         
     def readApplicationBlock(self):
+        self.header("APPLICATION EXTENSION BLOCK")
         print "application extension block"
         size = ord(self.file.read(1))
         assert size == 11
@@ -165,6 +165,7 @@ class GifExaminer:
         assert 0 == ord(self.file.read(1))
         
     def readImageBlock(self):
+        self.header("IMAGE BLOCK")
         left,top,width,height,packvar = struct.unpack('hhhhs',self.file.read(9))
         packvar = ord(packvar)
         print "image position: "
@@ -224,19 +225,73 @@ class GifExaminer:
             imagedata += self.file.read(imageblocksize)
             #print "image data:"
             #print imagedata
+        
+        imagestream = BitArray(bytes = imagedata)
+        reversedstream = BitArray()
+        for i in range(0,len(imagedata)):
+            byte = BitArray(bytes = imagedata[i])
+            byte.reverse()
+            reversedstream.append(byte)
+        
+        self.lzwDecode(reversedstream,LZWminsize)
             
+        
+        
+        
+            
+    def lzwDecode(self,imageblock,defaultcodesize):
+        decompressedString = ""
+        codesize = defaultcodesize + 1
+        pointer = 0
+        numtostr = {}
+        strtonum = {}
+        nextcodepoint = 2**codesize +2
+        for i in range(0,2**(codesize)-1):
+            numtostr[i] = chr(i)
+            strtonum[chr(i)] = i
+        
+        clearcode = 2**defaultcodesize
+        endcode = 2**defaultcodesize+1
+        currentCode = ""    
+        
+        while True:
+            word = imageblock[pointer:pointer+codesize]
+            word.reverse()
+            if word.uint == endcode:
+                break;
+            elif word.uint == clearcode:
+                print "implement clear code"
+            elif numtostr.get(word.uint,False) != False:
+                currentCode += numtostr[word.uint]
+                
+                if strtonum.get(currentCode,False) == False:
+                    decompressedString += currentCode
+                    strtonum[currentCode] = nextcodepoint
+                    numtostr[nextcodepoint] = currentCode
+                    currentCode = numtostr[word.uint]
+                    nextcodepoint +=1
+                else:
+                    ""
+            else:#edge case
+                print "whoopsie"
+                
+            pointer += codesize
+            
+        print self.globalPalette[ord(decompressedString[0])]
+                
+    
     def exit(self):
         print self.imageCount
         print "file finished. exiting"
             
-        
-        
-        
-    
+
     def incorrectFormat(self):
         print "something went wrong"
         
+    def header(self,title):
+        print "-"*80
+        print title
+        print "-"*80
         
-        
-a = GifExaminer('gifs/1348710922987.gif')
+a = GifExaminer('wkY1FUI.gif')
 #b = GifExaminer('copy_1348710922987.gif')
