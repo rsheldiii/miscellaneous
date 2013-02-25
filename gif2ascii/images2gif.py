@@ -230,9 +230,9 @@ class GifWriter:
         -------
           * 0 - No disposal specified.
           * 1 - Do not dispose. The graphic is to be left in place.
-          * 2 -	Restore to background color. The area used by the graphic 
+          * 2 -    Restore to background color. The area used by the graphic 
             must be restored to the background color.
-          * 3 -	Restore to previous. The decoder is required to restore the
+          * 3 -    Restore to previous. The decoder is required to restore the
             area overwritten by the graphic with what was there prior to 
             rendering the graphic.
           * 4-7 -To be defined. 
@@ -413,7 +413,7 @@ class GifWriter:
         return images2
     
     
-    def writeGifToFile(self, fp, images, durations, loops, xys, disposes):
+    def writeGifToFile(self, fp, images, durations, loops, xys, disposes,transparency):
         """ writeGifToFile(fp, images, durations, loops, xys, disposes)
         
         Given a set of images writes the bytes to the specified stream.
@@ -463,7 +463,7 @@ class GifWriter:
                 if self.transparency: transparent_flag = 1
                 
                 graphext = self.getGraphicsControlExt(durations[frames],
-                                                        disposes[frames],transparent_flag=transparent_flag,transparency_index=255)
+                                                        disposes[frames],transparent_flag=transparent_flag,transparency_index=transparency)
 
                 # Make image descriptor suitable for using 256 local color palette
                 lid = self.getImageDescriptor(im, xys[frames])
@@ -496,7 +496,7 @@ class GifWriter:
 ## Exposed functions
 
 def writeGif(filename, images, duration=0.1, repeat=True, dither=False, 
-                nq=0, subRectangles=True, dispose=None):
+                nq=0, subRectangles=True, dispose=None, transparency = 0):
     """ writeGif(filename, images, duration=0.1, repeat=True, dither=False,
                     nq=0, subRectangles=True, dispose=None)
     
@@ -590,7 +590,7 @@ def writeGif(filename, images, duration=0.1, repeat=True, dither=False,
     # Write
     fp = open(filename, 'wb')
     try:
-        gifWriter.writeGifToFile(fp, images, duration, loops, xy, dispose)
+        gifWriter.writeGifToFile(fp, images, duration, loops, xy, dispose, transparency)
     finally:
         fp.close()
 
