@@ -2,7 +2,7 @@ require 'sequel'
 require 'rubygems'
 
 
-DB = Sequel.connect('mysql://root:8Characters!@localhost/sinatra_notes')
+DB = Sequel.connect('mysql://username:password@localhost/sinatra_notes')
 
 DB.create_table :notes do
   varchar :name, :primary_key => true
