@@ -1,0 +1,7 @@
+<h1>notes application</h1>
+<ul>
+<%notes.each do |note|%>
+  <li><a href = "<%= note[:path] %>" > <%=note[:name]%> </a> &nbsp; <a href = "<%= note[:path] + "delete/" %>">delete</a></li>
+<%end%>
+</ul>
+<a href = "/note/new/">new</a>

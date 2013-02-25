@@ -1,0 +1,2 @@
+Most code taken from top comment here: http://www.reddit.com/r/dailyprogrammer/comments/uzx7y/6132012_challenge_64_difficult/
+added a system wrapper to make changing the state and city easier, but not only do they not have my city in New York, they don't even have massachusetts weather. At all. Which is a shame cuz I would have totally put this on my path

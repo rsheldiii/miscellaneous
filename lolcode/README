@@ -1,0 +1,19 @@
+LOLCODE is an esoteric programming language designed to mimic "lolcat" speech, of popular internet fame.
+
+http://en.wikipedia.org/wiki/LOLCODE
+http://en.wikipedia.org/wiki/Lolcat
+
+After getting a feel for the syntactic pitfalls of the language (for instance, tabs in the included interpreter are not whitespace), it's actually really fun to write in. Kinda like a weird combination of scheme and an older imperative language.
+
+hello world in LOLCODE is:
+
+HAI 1.2
+    CAN HAS STDIO?
+    VISIBLE "HELLO WURLD"
+KTHXBYE
+
+my personal favorite is the for loop though:
+
+IM IN YR LOOP UPPIN YR VAR TIL BOTH SAEM VAR AN 100
+
+I decided on implementing a Mandelbrot Set calculator. The calculator cannot zoom, but the resolution and accuracy can be played with. The output is a heatmap of the function, with 0 being not in the set, and 9 being most probably in the set. I may expand later, but for an esoteric programming language the feature set is so complete I almost feel like I'm cheating

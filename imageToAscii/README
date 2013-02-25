@@ -1,0 +1,5 @@
+this is an image-to-ascii converter.
+
+usage: python imageToAscii.py [list of images]
+
+ascii conversion is basic as of now, I haven't gotten around to making a good rgb-to-ascii conversion dictionary, but once I do the implementation will take the same amount of code (swapping out a dictionary declaration and access for the if clause). I also don't have alpha interpretation set up, but that should be only a few lines. What happens now is if there is complete white in the image it will be replaced with "w", whereas anything else will be replaced with "b". This is meant to be a placeholder, and I will update this soon. In the meantime, this works well on greyscale images and exceptionally well on my mandelbrot generator, as white means "in the set within x passes." Sample in and out is provided
