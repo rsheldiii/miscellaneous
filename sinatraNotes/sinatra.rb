@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sequel'
 
-DB = Sequel.connect('mysql://root:8Characters!@localhost/sinatra_notes')
+DB = Sequel.connect('mysql://username:password@localhost/sinatra_notes')
 notes = DB[:notes]
 
 get '/' do
