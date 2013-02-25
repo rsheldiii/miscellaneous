@@ -12,9 +12,9 @@ class quoteMaker:
 		                  
 		self.headers = {'User-Agent' : 'instant wallpaper quote bot by /u/wallpaperquotebot'}
 		self.session = requests.session(headers=self.headers)
-		payload = {'passwd' : "8Characters!",'user' : "wallpaperquotebot",'rem' : True}
-		print(self.session.post('http://www.reddit.com/api/login',data=payload,headers=self.headers))
-		time.sleep(2);
+		#payload = {'passwd' : "PASSWORD",'user' : "USER",'rem' : True}
+		#print(self.session.post('http://www.reddit.com/api/login',data=payload,headers=self.headers))
+		#time.sleep(2);
 	def setPictureUrl(self):
 		subject = self.session.get("http://www.reddit.com/r/wallpapers/random.json")#TODO: make one that pulls a random wallpaper from hot so we can use this on a daily basis (as it prolly wont pull the same one) and it will be of higher quality
 		imageJson = subject.json[0]
