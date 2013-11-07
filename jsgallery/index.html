@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = 'stylesheet' href = 'main.css'>
+		<script src = 'jquery.js'></script>
+		<script src = 'gallery.js'></script>
+		<style>
+			body,html,.gallery{
+				width:100%;
+				height:100%;
+			}
+			html{
+				background-color:#FDF;
+			}
+		</style>
+		<script>
+			var slides = [
+				'images/lion.jpg',
+				'images/fish.jpg',
+				'images/cell.jpg',
+				'images/tree.jpg',
+				'images/tiger.jpg',
+				'images/boats.jpg',
+				'images/island.jpg',
+			];
+		</script>
+	</head>
+	<body>
+		<div class = 'gallery'>
+			<div class = 'main window'>
+			</div>
+			<div class = 'slideshow'>
+				<a class = 'left arrow'><img src = 'images/left_caret.png'></a>
+				<div class = 'slidesWrapper'>
+					<div class = 'slides'></div>
+				</div>
+				<a class = 'right arrow'><img src = 'images/right_caret.png'></a>
+			</div>
+			<div class = 'largeWindowWrapper'>
+				<div class = 'largeWindow'>
+					<a class = 'left arrow'><img src = 'images/left_arrow.png'></a>
+					<img class = 'large image'>
+					<a class = 'right arrow'><img src = "images/right_arrow.png"></a>
+					<a class = 'exit'><img src = "images/exit.png"></a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

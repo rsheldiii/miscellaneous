@@ -1,0 +1,1 @@
+javascript gallery widget I made for a friend. should work just fine in place

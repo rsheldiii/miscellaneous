@@ -1,0 +1,186 @@
+.gallery *{
+background-color:#EEE;
+}
+
+.main.window{
+	height:500px;
+	width:500px;
+	position:relative;
+	float:left;
+	border:10px solid white;
+	box-shadow: 8px 8px 8px 8px rgba(0,0,0,.7);
+	margin-bottom:20px;
+	cursor: pointer; cursor: hand;
+}
+
+.main img{
+opacity:0;
+position:absolute;
+transition: all 1s ease-in-out;
+-webkit-transition: all 1s ease-in-out;
+}
+.goingOut{
+	opacity:0;
+	z-index:1;
+}
+.mainImage{
+	opacity:1 !important;
+	z-index:1;
+}
+
+
+.slideshow{
+	width:500px;
+	height:100px;
+	border:10px solid white;
+	box-shadow: 8px 8px 8px 8px rgba(0,0,0,.7);
+	clear:both;
+	position:relative;
+}
+
+.arrow{
+cursor: pointer; cursor: hand;
+}
+
+.slideshow .right.arrow{
+float:right;
+}
+.slideshow .left.arrow{
+float:left;
+}
+
+.slideshow .arrow{
+height:100%;
+width:5%;
+position:relative;
+background-color:blue;
+}
+
+.slideshow .arrow img{
+	width:100%;
+	height:100%;
+}
+
+.slidesWrapper{
+position:relative;
+overflow-x:hidden;
+float:left;
+width:440px;
+xbackground-color:red;
+height:100px;
+}
+
+.slides{
+position:relative;
+height:100%;
+width:1000000%;
+xopacity:.5;
+xbackground-color:green;
+ left:0%;
+ 
+ transition: all 1s;
+ -webkit-transition: all 1s;
+}
+
+.slides div{
+
+position:relative;
+ float:left;
+ margin-left:10px;
+ box-shadow:3px 3px 3px 3px rgba(0,0,0,.7);
+ width:100px;
+ height:100%;
+ -webkit-transition: all 1s;
+ transition:all 1s;
+ overflow:hidden;
+ cursor: pointer; cursor: hand;
+}
+
+.slides div img{/*todo: add class to these images*/
+opacity:.5;
+-webkit-transition: opacity 1s;
+ transition:opacity 1s;
+}
+
+.slides div img:hover{/*todo: add class to these images*/
+opacity:1 !important;
+}
+
+.target img{
+	opacity:1 !important;
+}
+
+.largeWindowWrapper{
+	left:0;
+	top:0;
+	position:fixed;
+	opacity:0;
+	z-index:-1;
+	width:100%;
+	height:100%;
+	background-color:rgba(100,100,100,0.7);
+	transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+}
+
+.showOverlay{
+	opacity:1;
+}
+
+.largeWindow{
+	position:absolute;
+	left:5%;
+	top:5%;
+	width:90%;
+	height:90%;
+	text-align:center;
+}
+
+.largeWindow img{
+	position:relative;
+	display:block;
+	margin:0 auto;
+}
+
+.overlayImage{
+	opacity:0;
+	transition: opacity .5s;
+	-webkit-transition: opacity .5s;
+}
+
+.exit{
+	position:absolute;
+	top:0;
+	right:0;
+	width:50px;
+	height:50px;
+	cursor: pointer; cursor: hand;
+	z-index:2;
+}
+
+.exit img{
+		width:50px;
+	height:50px;
+}
+
+.largeWindow .arrow{
+	position:absolute;
+	width:20px;
+	height:10%;
+	top:45%;
+    z-index:2;
+}
+
+.largeWindow .arrow img{
+	width:100%;
+	height:100%;
+}
+
+.largeWindow .right.arrow{
+	right:0;
+}
+
+.largeWindow .left.arrow{
+	left:0;
+}
+
